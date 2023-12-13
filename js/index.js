@@ -5,123 +5,124 @@ const CON_TORTA = 1000;
 const MENU1 = 2500;
 const MENU2 = 3000;
 const MENU3 = 3500;
-let nomnbre;
+let nombre;  
 let totalPerCapi = 0;
-
+let total = 0;
+const desc = 15;
+let carrito = []; 
+let totalCarrito = 0; 
 
 class Cliente {
-        constructor (nombre, edad, email ){
+    constructor(nombre, edad, email) {
         this.nombre = nombre,
         this.edad = edad,
         this.email = email
     }
 }
 
-nombreIngresado = prompt("Bienvenido aqui va a poder diseñar su evento, ingrese su nombre")
-edadIngresada = prompt("Ingrese su edad")
-emailIngresado = prompt("Ingrese su email")
-const CLIENTE1 = new Cliente (nombreIngresado, edadIngresada, emailIngresado )
+function calcularEvento() {
+    let nombreIngresado = document.getElementById("nombre").value;
+    let emailIngresado = document.getElementById("email").value;
+    let tipoEvento = document.getElementById("tipoEvento").value;
+    let personas = document.getElementById("personas").value;
+    let menuElegido = document.getElementById("menu").value;
+    let conBebida = document.getElementById("conBebida").value;
+    let conMusica = document.getElementById("conMusica").value;
+    let conTorta = document.getElementById("conTorta").value;
+
+    switch (menuElegido) {
+        case "pasta":
+            totalPerCapi += MENU1;
+            break;
+        case "pescado":
+            totalPerCapi += MENU2;
+            break;
+        case "asado":
+            totalPerCapi += MENU3;
+            break;
+        default:
+            return;
+    }
+
+    if (conBebida === "si") {
+        totalPerCapi += CON_BEBIDA;
+    }
+
+    if (conMusica === "si") {
+        totalPerCapi += CON_DJ;
+    }
+
+    if (conTorta === "si") {
+        totalPerCapi += CON_TORTA;
+    }
+
+    function costoTotal(gastoPers, personas) {
+        return gastoPers * personas;
+    }
+
+    total = costoTotal(totalPerCapi, personas);
 
 
-let evento = prompt("que tipo de evento realizara?")
+    let resultadoEvento = document.getElementById("resultadoEvento");
+    resultadoEvento.innerHTML = `
+        <p>Evento: ${tipoEvento}</p>
+        <p>Personas: ${personas}</p>
+        <p>Menú: ${menuElegido}</p>
+        <p>Con bebida: ${conBebida}</p>
+        <p>Con música: ${conMusica}</p>
+        <p>Con torta: ${conTorta}</p>
+        <p>Total por invitado: ${totalPerCapi}</p>
+        <p>Total: $${total}</p>`;
 
-pers = prompt("cuantas personas asistiran al " + evento + "?")
+        const EVENTO = new Producto(`tu ${tipoEvento}`, total);
 
-let platoElegido = prompt("elija su menu: pasta, pescado, asado").toLowerCase();
-switch(platoElegido){
-    case platoElegido = "pasta":
-        totalPerCapi = totalPerCapi + MENU1
-        alert("elegiste el menu pasta")
-        break;
-    case platoElegido = "pescado":
-        totalPerCapi = totalPerCapi + MENU2
-        alert("elegiste el menu pescado, muy buena eleccion");
-        break;
-    case platoElegido = "asado":
-        totalPerCapi = totalPerCapi + MENU3
-        alert("felicidades elegiste el menu asado")
-    default:
-
+        agregarAlCarrito(EVENTO);
 }
 
-let conSinBebida = prompt("desea el menu con bebida incluida. si/no").toLowerCase();
-switch (conSinBebida){
-    case (conSinBebida = "si"):
-        totalPerCapi = totalPerCapi + CON_BEBIDA
-        alert("exelente nos encargamos de la bebida")
-        break;
-    case (conSinBebida = "no"):
-        alert("perfecto usted se encarga de la bebida")
-        break;
-    default:
-        alert("ingrese un dato valido");
+function agregarAlCarrito(producto) {
+    carrito.push(producto);
+    actualizarCarrito();
 }
 
-let conMusica = prompt("desea contratar DJ. si/no").toLowerCase();
-switch(conMusica){
-    case (conMusica = "si"):
-        totalPerCapi = totalPerCapi + CON_DJ
-        alert("la pista de baile es nuestra")
-        break;
-    case (conMusica = "no"):
-        alert("usted se encarga de la musica")
-        break;
-    default:
-        alert("ingrese un dato valido")
-}
-let conTorta = prompt("desea incluir la torta. si/no").toLowerCase();
-switch(conTorta){
-    case (conMusica = "si"):
-        totalPerCapi = totalPerCapi + CON_TORTA
-        alert("le prepararemos el mejor pastel")
-        break;
-    case (conTorta = "no"):
-        alert("okey")
-        break
-    default:
-        alert("ingrese un dato valido")
+function actualizarCarrito() {
+    let listaCarrito = document.getElementById("listaCarrito");
+    let totalCarritoElemento = document.getElementById("totalCarrito");
+
+    listaCarrito.innerHTML = "";
+
+    carrito.forEach(producto => {
+        let li = document.createElement("li");
+        li.textContent = `${producto.articulo} - $${producto.precio}`;
+        listaCarrito.appendChild(li);
+    });
+
+    totalCarrito = carrito.reduce((total, producto) => total + producto.precio, 0);
+
+    totalCarritoElemento.textContent = totalCarrito;
 }
 
-function costoTotal(gastoPers, personas){
-    valorTotal = gastoPers * personas
-    return valorTotal
-}
-
-let total = costoTotal ( totalPerCapi, pers)
-alert(" su " + evento + " para " + pers + " personas " + "tiene un valor aproximado de " + totalPerCapi + " por invitado, con un valor total de $ " + total + " muchas gracias " + nombreIngresado)
-
-function descuentoEfectivo (precioTotal, descuento){
-    let desc = (precioTotal * descuento)/100
-    let totalConDesc = precioTotal - desc
-    return totalConDesc
-}
-
-let pagoEnEfectivo = descuentoEfectivo (total,15)
-alert("realizando el pago en efectivo tiene un 15% de descuento, siendo asi el valor total: $ " + pagoEnEfectivo)
-
-
-class Producto{
-    constructor (articulo, precio, img){
+class Producto {
+    constructor(articulo, precio) {
         this.articulo = articulo,
-        this.precio = precio,
-        this.img = img
+        this.precio = precio
     }
 }
 
-const EVENTO = new Producto (`tu ${evento}`, valorTotal, img)
-const GACEBOS = new Producto ("Gacebos", 15000, "gaceboimg")
-const BARRA_COCTEL = new Producto ("Barra De Tragos", 20000, "barraimg")
 
-const PRODUCTOS = [EVENTO, GACEBOS, BARRA_COCTEL]
+const GACEBOS = new Producto("Gacebos", 15000);
+const BARRA_COCTEL = new Producto("Barra De Tragos", 20000);
 
-todosProductos.forEach(producto => {
+const PRODUCTOS = [GACEBOS, BARRA_COCTEL];
+
+let contenedorProductos = document.getElementById("contenedorProductos");
+
+PRODUCTOS.forEach(producto => {
     let div = document.createElement("div");
     div.className = "card";
     div.innerHTML = `
-                    <p>articulo: ${Producto.articulo}</p>
-                    <p>precio: ${Producto.precio}</p>
-                    <img src= "${Producto.img}"/>
-                    <button>Agregar al carrito</button>
-    `
-    contenerdoProductos.appendChild(div);
-})
+        <p>Artículo: ${producto.articulo}</p>
+        <p>Precio: $${producto.precio}</p>
+        <button onclick="agregarAlCarrito(${JSON.stringify(producto)})">Agregar al carrito</button>
+    `;
+    contenedorProductos.appendChild(div);
+});
