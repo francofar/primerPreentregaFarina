@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-body {
+.bodyImg {
     background-image: url(../assets/img/robert-mathews-xXaLfz6V9rQ-unsplash.jpg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -12,7 +12,6 @@ body {
 
 .navBar {
     height: 60px;
-    background-color: aquamarine;
     display: flex;
     flex-direction: row;
     text-align: center;
@@ -26,7 +25,6 @@ li {
 }
 
 main {
-    background-color: antiquewhite;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,7 +34,6 @@ main {
 h1 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 60px;
-    background-color: rgb(20, 146, 104);
     text-transform: capitalize;
     padding: 20px;
     margin-bottom: 10px;
@@ -89,4 +86,48 @@ button:hover {
 font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 
 
+}
+.bodyInicio{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url("../assets/img/body.jpg") ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    backdrop-filter: 30%;
+}
+
+.container{
+    width: 18.75rem;
+}
+
+.fromLogin{
+    display: flex;
+    flex-direction: column;
+}
+.labelLogin{
+    margin-bottom: .625rem;
+}
+.inputLogin{
+    margin-bottom: 1.25rem;
+    padding: .5rem;
+    border-radius: .625rem;
+    border: none;
+
+}
+.buttonLogin{
+    padding: .625rem;
+    background-color: #4CAF50;
+    color: #fff;
+    font-size: 1.25rem;
+    border: none;
+    border-radius: .25rem;
+}
+
+.password-container{
+    position: relative;
+}
+.toggle-password{
+    position: absolute;
 }

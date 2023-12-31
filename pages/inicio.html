@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Document</title>
+</head>
+<body class="bodyImg">
+    <header>
+        <nav class="navBar">
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Menu</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div>
+            <h1>Bienvenidos a nuestra página oficial</h1>
+        </div>
+        <h2>Aquí podrás crear tu fiesta como desees</h2>
+
+
+        <form id="eventoForm">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="tipoEvento">Tipo de evento:</label>
+            <input type="text" id="tipoEvento" required>
+
+            <label for="personas">Número de personas:</label>
+            <input type="number" id="personas" required>
+
+            <label for="menu">Elige tu menú:</label>
+            <select id="menu">
+                <option value="pasta">Pasta</option>
+                <option value="pescado">Pescado</option>
+                <option value="asado">Asado</option>
+            </select>
+
+            <label for="conBebida">¿Menú con bebida incluida?</label>
+            <select id="conBebida">
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="conMusica">¿Contratar DJ?</label>
+            <select id="conMusica">
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="conTorta">¿Incluir torta?</label>
+            <select id="conTorta">
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+            </select>
+
+            <button type="button" onclick="calcularEvento()">Calcular Evento</button>
+        </form>
+
+        <div class="resultado" id="resultadoEvento"></div>
+        
+        <div id="contenedorProductos"></div>
+
+        
+
+        <div id="carrito">
+            <h3>Carrito de compras</h3>
+            <ul id="listaCarrito"></ul>
+            <p>Total en el carrito: $<span id="totalCarrito">0</span></p>
+        </div>
+
+    </main>    
+    <footer>
+
+    </footer>
+
+    <script src="../js/index.js"></script>
+</body>
+</html>
