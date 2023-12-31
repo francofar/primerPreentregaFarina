@@ -150,3 +150,23 @@ function actualizarCarrito() {
 
     localStorage.setItem("carrito", JSON.stringify(carrito));
 }
+
+document.addEventListener("DOMContentLoaded", obtenerClima);
+
+function obtenerClima() {
+
+    const apiKey = '693c9fa780e34e1aaee37c85634b5b09';
+    const ciudad = 'buenos aires';
+    const idioma = 'es';
+
+    const apiUrl = `http://api.weatherbit.io/v2.0/current?city=${ciudad}&lang=${idioma}&key=${apiKey}`;
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            // Actualiza elementos en la página con la información del clima
+            document.getElementById('temperatura').textContent = `Temperatura: ${data.data[0].temp}°C`;
+            document.getElementById('descripcion').textContent = `Descripción: ${data.data[0].weather.description}`;
+        })
+        .catch(error => console.error('Error al obtener el clima:', error));
+}
